@@ -1,6 +1,6 @@
 function [A, b] = Lap2D(m)
     h = 1 / (m + 1);
-    A = zeros(m ^2);
+    A = zeros(m ^ 2);
     b = zeros(m ^ 2, 1);
 
     for i = 1:m
