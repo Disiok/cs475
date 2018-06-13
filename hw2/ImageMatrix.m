@@ -1,14 +1,19 @@
-function A = ImageMatrix(u_vec)
-    % Hyper parameters
-    alpha = 4e-2;
-    beta = 1e-6;
-
-
-    % Input
+function A = ImageMatrix(u_vec, alpha)
+    % Sizes
     n = size(u_vec, 1);
     m = sqrt(n);
-    u = reshape(u_vec, [m, m])';
     h = 1 / (m + 1);
+
+    % Hyper parameters
+
+    beta = 1e-6;
+    if (nargin < 2)
+        alpha = 4e-2;
+        fprintf("Using default alpha: %e\r\n", alpha);
+    end
+
+    % Input
+    u = reshape(u_vec, [m, m])';
 
     % Setup
     AW = zeros(m, m);
