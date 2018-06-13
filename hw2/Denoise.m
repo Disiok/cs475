@@ -4,7 +4,7 @@ function [z, u_denoised] = Denoise()
     m = 32;
 
     [u_exact, z] = set_image(m);
-    u0 = ImageRHS(u_exact);
+    u0 = ImageRHS(z);
     u = u0;
 
     for k=1:K

@@ -58,6 +58,7 @@ function A = ImageMatrix(u_vec)
 
     A = diag(AC_vec) + diag(AN_vec, 1) + diag(AS_vec, -1) + diag(AE_vec, m) + diag(AW_vec, -m);
 
+
     for i=1:m-1
         A(i * m, i * m + 1) = 0;
         A(i * m + 1, i * m) = 0;
