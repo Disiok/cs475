@@ -1,16 +1,16 @@
-function A = ImageMatrix(u)
+function A = ImageMatrix(u_vec)
     % Hyper parameters
     alpha = 4 * 10 ^ (-2);
     beta = 10 ^ (-6);
-    h = 16;
+
 
     % Input
-    m = size(u, 1);
-    n = m ^ 2;
+    n = size(u_vec, 1);
+    m = sqrt(n);
+    u = reshape(u_vec, [m, m])';
+    h = 1 / (m + 1);
 
     % Setup
-    A = zeros(n);
-    A = sparse(A);
     AW = zeros(m, m);
     AE = zeros(m, m);
     AS = zeros(m, m);
@@ -50,9 +50,12 @@ function A = ImageMatrix(u)
         end
     end
 
-    A = A + diag(AC'(:));
-    A = A + diag(AN'(:)(2:n), 1);
-    A = A + diag(AS'(:)(1:n - 1), -1);
-    A = A + diag(AE'(1:m - 1,:)(:), m);
-    A = A + diag(AW'(2:m,:)(:), -m);
+    AC_vec = AC'(:);
+    AN_vec = AN'(:)(2:n);
+    AS_vec = AS'(:)(1:n - 1);
+    AE_vec = AE(1:m - 1,:)'(:);
+    AW_vec = AW(2:m,:)'(:);
+
+    A = diag(AC_vec) + diag(AN_vec, 1) + diag(AS_vec, -1) + diag(AE_vec, m) + diag(AW_vec, -m);
+    A = sparse(A);
 end
