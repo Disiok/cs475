@@ -5,8 +5,7 @@ function [x, iter] = Jacobi(A, b, x_initial, maxiter, tol)
         result = norm(r) <= tol * norm(b);
     end
 
-    D = diag(diag(A));
-    D_inv = inv(D);
+    D_inv = diag(1./diag(A));
 
     for iter=1:maxiter
         r = (b - A * x);

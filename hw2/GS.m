@@ -7,7 +7,6 @@ function [x, iter] = GS(A, b, x_initial, maxiter, tol)
 
     D = diag(diag(A));
     L = tril(A);
-    DL_inv = inv(D + L);
 
     for iter=1:maxiter
         r = (b - A * x);
@@ -18,6 +17,7 @@ function [x, iter] = GS(A, b, x_initial, maxiter, tol)
             end
         end
 
-        x = x + DL_inv * r;
+        delta = BandForwardSolve(D + L, r, m);
+        x = x + delta;
     end
 end

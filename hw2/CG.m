@@ -5,10 +5,6 @@ function [x, iter] = CG(A, b, x_initial, maxiter, tol)
         result = norm(r) <= tol * norm(b);
     end
 
-    D = diag(diag(A));
-    L = tril(A);
-    DL_inv = inv(D + L);
-
     for iter=1:maxiter
         r = (b - A * x);
 
