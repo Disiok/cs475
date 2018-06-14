@@ -6,10 +6,12 @@ function [z, u_denoised] = Denoise()
 
     m_grid = [16, 32, 64, 128];
     alpha_grid = [4e-2, 3e-2, 1.5e-2, 1.2e-2];
+    omega_grid = [23, 44, 72, 100];
 
     for i=1:4
         m = m_grid(i);
         alpha = alpha_grid(i);
+        omega = omega_grid(i);
         fprintf("Running %dx%d grid: \n", m, m);
         fprintf("Using alpha: %e\r\n", alpha);
 
@@ -57,7 +59,7 @@ function [z, u_denoised] = Denoise()
         time = cputime;
         for k=1:K
             A = ImageMatrix(u_sor, alpha);
-            [u_sor, iter_sor] = SOR(0.5, A, u0, u_sor, maxiter, tol);
+            [u_sor, iter_sor] = SOR(omega, A, u0, u_sor, maxiter, tol);
             iter_sor_sum = iter_sor_sum + iter_sor;
         end
         elapsed = cputime - time;
