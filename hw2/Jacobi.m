@@ -9,10 +9,10 @@ function [x, iter] = Jacobi(A, b, x_initial, maxiter, tol)
 
     D_inv = diag(1./diag(A));
 
-    for iter=1:maxiter
+    for iter=0:maxiter
         r = (b - A * x);
 
-        if (mod(iter, 1000) == 1)
+        if (mod(iter, 1000) == 0)
             if is_converged(r)
                 break
             end

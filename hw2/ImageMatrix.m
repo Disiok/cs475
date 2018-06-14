@@ -55,11 +55,20 @@ function A = ImageMatrix(u_vec, alpha)
         end
     end
 
-    AC_vec = AC'(:);
-    AN_vec = AN'(:)(1:n - 1);
-    AS_vec = AS'(:)(2:n);
-    AE_vec = AE(1:m - 1,:)'(:);
-    AW_vec = AW(2:m,:)'(:);
+    AC_t = AC';
+    AN_t = AN';
+    AS_t = AS';
+    AE_t = AE(1:m - 1,:)';
+    AW_t = AW(2:m,:)';
+
+    AC_vec = AC_t(:);
+    AN_vec = AN_t(:);
+    AS_vec = AS_t(:);
+    AE_vec = AE_t(:);
+    AW_vec = AW_t(:);
+
+    AN_vec = AN_vec(1:n - 1);
+    AS_vec = AS_vec(2:n);
 
     A = diag(AC_vec) + diag(AN_vec, 1) + diag(AS_vec, -1) + diag(AE_vec, m) + diag(AW_vec, -m);
 
