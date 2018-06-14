@@ -1,8 +1,8 @@
 function [z, u_denoised] = Denoise()
     % Hyperparameters
     K = 10;
-    tol = 1e-2
-    maxiter = 100000
+    tol = 1e-2;
+    maxiter = 100000;
 
     m_grid = [3, 16, 32, 64, 128];
     alpha_grid = [4e-2, 4e-2, 3e-2, 1.5e-2, 1.2e-2];
