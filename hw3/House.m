@@ -4,7 +4,7 @@ function [v, beta] = House(x)
     if sigma^2 == 0 && x(1) >= 0
         beta = 0;
     else if sigma^2 == 0 && x(1) < 0
-        beta = -2;
+        beta = 2;
     else
         if x(1) <= 0
             v(1) = x(1) - sqrt(x(1)^2 + sigma^2);

@@ -1,7 +1,10 @@
 function [B, Q] = Triangular(A)
     [n, _] = size(A);
+    betas = zeros(n - 2, 1);
+
     for j = 1:n-2
         [v, beta] = House(A(j+1:n, j));
+        betas(j) = beta;
         A(j+1, j) = norm(A(j+1:n, j));
         A(j, j+1) = A(j+1, j);
         w = beta * A(j+1:n, j+1:n) * v;
@@ -16,7 +19,7 @@ function [B, Q] = Triangular(A)
     Q = eye(n);
     for j=n-2:-1:1
         v = vertcat([1], A(j+2:n, j));
-        beta = 2 / norm(v) ^ 2;
+        beta = betas(j);
         Q(j+1:n, j+1:n) = Q(j+1:n, j+1:n) - (beta * v) * (v' * Q(j+1:n, j+1:n));
     end
 end
